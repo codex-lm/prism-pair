@@ -58,7 +58,10 @@
           if (error) reject(error); else resolve();
         };
         gatherTimer = globalThis.setTimeout(function () {
-          if (gathered) gathered(errorFrom({ code: 'PEER_GATHER_TIMEOUT', message: 'Network address discovery timed out. Try another network or return to solo play.' }));
+          // Some mobile interfaces keep gathering after useful addresses exist.
+          // Send that bounded snapshot once; do not add a trickle/retry loop.
+          var hasCandidate = pc.localDescription && /^a=candidate:\S+/m.test(pc.localDescription.sdp);
+          if (gathered) gathered(hasCandidate ? undefined : errorFrom({ code: 'PEER_GATHER_TIMEOUT', message: 'Network address discovery timed out. Try another network or return to solo play.' }));
         }, 8000);
       });
       if (!done) await sendSignal('description', { type: pc.localDescription.type, sdp: pc.localDescription.sdp });

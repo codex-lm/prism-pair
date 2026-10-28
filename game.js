@@ -16,7 +16,7 @@
   function translate(){document.documentElement.lang=locale;document.querySelectorAll('[data-copy]').forEach(function(el){el.textContent=copy[locale][el.dataset.copy];});text('status',statusKey);text('role',roleKey);}
   document.querySelectorAll('[data-lang]').forEach(function(button){button.addEventListener('click',function(){locale=button.dataset.lang;document.querySelectorAll('[data-lang]').forEach(function(el){el.setAttribute('aria-pressed',String(el===button));});translate();});});
   function clamp(value){return Math.max(.06,Math.min(.94,value));}
-  function buttons(connected){document.getElementById('leave').hidden=!connected;document.getElementById('connect').disabled=mode==='connecting';document.getElementById('solo').disabled=mode==='connecting';}
+  function buttons(connected){var locked=mode==='connecting'||mode==='host'||mode==='guest';document.getElementById('leave').hidden=!connected;document.getElementById('connect').disabled=locked;document.getElementById('solo').disabled=locked;}
   function stop(){generation++;if(connectionController){connectionController.abort();connectionController=null;}if(peer){var previous=peer;peer=null;previous.close();}mode='idle';buttons(false);}
   document.getElementById('solo').addEventListener('click',function(){stop();state=fresh();mode='solo';role('practice');status('playing');canvas.focus();});
   document.getElementById('leave').addEventListener('click',function(){stop();role('ready');status('closed');});

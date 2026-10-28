@@ -39,6 +39,7 @@
     function disconnect(reason) {
       if (stopped) return;
       stopped = true;
+      globalThis.removeEventListener('pagehide', leaveOnExit);
       disconnectListeners.forEach(function (listener) { listener(errorFrom(reason)); });
       disconnectListeners.clear();
       var onError = subscriptionError;
@@ -136,7 +137,11 @@
         return function () { disconnectListeners.delete(listener); };
       }, { identifier: identifier, errorFrom: errorFrom, validData: validData });
     };
-    globalThis.addEventListener('pagehide', function () { disconnect({ code: 'ROOM_CONNECTION_CLOSED', message: 'The game document closed.' }); }, { once: true });
+    function leaveOnExit(event) {
+      if (event.persisted) return;
+      disconnect({ code: 'ROOM_CONNECTION_CLOSED', message: 'The game document closed.' });
+    }
+    globalThis.addEventListener('pagehide', leaveOnExit);
     return result;
   }
   function connect() {

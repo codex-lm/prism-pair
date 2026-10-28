@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Prism Pair</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header><span class="eyebrow">A SMALL COOPERATIVE CONSTELLATION</span><nav aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="fr" aria-pressed="false">FR</button><button data-lang="es" aria-pressed="false">ES</button></nav></header>
+  <h1>Prism <em>Pair</em><span aria-hidden="true">✦</span></h1>
+  <p class="intro" data-copy="intro">Two lights. One constellation. Find your place together.</p>
+  <section class="playfield" aria-label="Playfield">
+    <div class="scoreboard"><span><strong id="score">0</strong> <span data-copy="stars">stars</span></span><span id="clock">60s</span><span id="role" data-copy="ready">Ready to glow</span></div>
+    <canvas id="game" tabindex="0" aria-label="Move your light with arrow keys, A/D or touch. Align both lights with their rings."></canvas>
+    <div class="charge"><span id="charge"></span></div>
+    <p id="status" role="status" aria-live="polite">Choose a solo rehearsal or connect the room selected in LOB7.</p>
+  </section>
+  <div class="actions"><button id="solo" class="primary" data-copy="solo">Solo rehearsal</button><button id="connect" data-copy="connect">Connect selected room</button><button id="leave" hidden data-copy="leave">Leave game</button></div>
+  <p class="instructions" data-copy="instructions">Move with ← → or A/D, or drag your light. Match both rings and hold together to collect a star.</p>
+  <p class="fine" data-copy="fine">Direct play uses the room chosen in LOB7. Keep the host tab open. Some networks cannot connect.</p>
+</main>
+<script src="lob7-rooms.js"></script>
+<script src="lob7-rooms-p2p.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

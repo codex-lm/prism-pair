@@ -1,0 +1,11 @@
+{
+  "title": "Prism Pair",
+  "description": "Guide two lights into a shared constellation. Practise solo, or invite a friend for a short cooperative game.",
+  "entrypoint": "index.html",
+  "license": "MIT",
+  "controls": ["Move your light with the arrow keys or A/D, or drag across the playfield.", "Align both lights with their matching rings to collect a star.", "Keep the host tab open during a two-player game."],
+  "genre": ["Cooperative", "Arcade"],
+  "themes": ["Light", "Constellations"],
+  "credits": ["Original game by Nilo for LOB7, with AI assistance."],
+  "multiplayer": { "mode": "p2p", "maxPlayers": 2 }
+}
